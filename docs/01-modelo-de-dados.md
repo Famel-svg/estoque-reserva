@@ -27,4 +27,4 @@ Schema versionado com Flyway (`src/main/resources/db/migration`). Hibernate roda
 ## Entidades
 
 - `Produto` e `Reserva` ficam em pacotes separados (`produto`, `reserva`).
-- `Produto.version` é o ponto da proteção contra overbooking (ver [04-concorrencia.md](04-concorrencia.md)).
+- `Produto.version` é o ponto da proteção contra overbooking (ver [05-concorrencia.md](05-concorrencia.md)).
