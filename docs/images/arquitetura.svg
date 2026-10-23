@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 380" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+  <defs>
+    <marker id="seta" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#475569"/>
+    </marker>
+  </defs>
+  <rect width="880" height="380" fill="#ffffff"/>
+  <text x="440" y="34" text-anchor="middle" font-size="20" font-weight="600" fill="#0f172a">Arquitetura: reserva sem overbooking</text>
+
+  <!-- Cliente -->
+  <rect x="30" y="150" width="150" height="80" rx="10" fill="#f1f5f9" stroke="#64748b" stroke-width="2"/>
+  <text x="105" y="184" text-anchor="middle" font-size="16" font-weight="600" fill="#0f172a">Cliente</text>
+  <text x="105" y="206" text-anchor="middle" font-size="13" fill="#475569">HTTP / JSON</text>
+
+  <!-- API -->
+  <rect x="250" y="70" width="380" height="240" rx="12" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+  <text x="440" y="98" text-anchor="middle" font-size="16" font-weight="600" fill="#1e3a8a">Spring Boot</text>
+
+  <rect x="275" y="120" width="330" height="48" rx="8" fill="#ffffff" stroke="#93c5fd"/>
+  <text x="440" y="150" text-anchor="middle" font-size="14" fill="#0f172a">ProdutoController / ReservaController</text>
+
+  <rect x="275" y="190" width="330" height="48" rx="8" fill="#ffffff" stroke="#93c5fd"/>
+  <text x="440" y="220" text-anchor="middle" font-size="14" fill="#0f172a">ReservaService (@Transactional)</text>
+
+  <rect x="275" y="256" width="330" height="36" rx="8" fill="#fef9c3" stroke="#ca8a04"/>
+  <text x="440" y="279" text-anchor="middle" font-size="13" fill="#713f12">ReservaExpiracaoJob  (@Scheduled)</text>
+
+  <!-- Banco -->
+  <rect x="700" y="150" width="150" height="80" rx="10" fill="#ecfdf5" stroke="#059669" stroke-width="2"/>
+  <text x="775" y="182" text-anchor="middle" font-size="16" font-weight="600" fill="#064e3b">PostgreSQL</text>
+  <text x="775" y="204" text-anchor="middle" font-size="12" fill="#065f46">produto.version</text>
+
+  <!-- Setas -->
+  <line x1="180" y1="190" x2="250" y2="190" stroke="#475569" stroke-width="2" marker-end="url(#seta)"/>
+  <line x1="440" y1="168" x2="440" y2="190" stroke="#475569" stroke-width="2" marker-end="url(#seta)"/>
+  <line x1="440" y1="238" x2="440" y2="256" stroke="#475569" stroke-width="2" marker-end="url(#seta)"/>
+  <line x1="630" y1="210" x2="700" y2="190" stroke="#475569" stroke-width="2" marker-end="url(#seta)"/>
+  <text x="665" y="176" text-anchor="middle" font-size="12" fill="#475569">UPDATE ... WHERE version = ?</text>
+
+  <text x="440" y="346" text-anchor="middle" font-size="13" fill="#475569">Redis fica de fora desta versão: é evolução citada no README.</text>
+</svg>

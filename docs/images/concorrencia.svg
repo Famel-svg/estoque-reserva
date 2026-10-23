@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 400" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+  <rect width="880" height="400" fill="#ffffff"/>
+  <text x="440" y="34" text-anchor="middle" font-size="20" font-weight="600" fill="#0f172a">Disputa pela última unidade (estoque = 1)</text>
+
+  <!-- Linhas do tempo -->
+  <line x1="60" y1="110" x2="840" y2="110" stroke="#cbd5e1" stroke-width="2"/>
+  <line x1="60" y1="190" x2="840" y2="190" stroke="#cbd5e1" stroke-width="2"/>
+  <line x1="60" y1="270" x2="840" y2="270" stroke="#cbd5e1" stroke-width="2"/>
+
+  <text x="50" y="115" text-anchor="end" font-size="14" fill="#334155">Thread A</text>
+  <text x="50" y="195" text-anchor="end" font-size="14" fill="#334155">Thread B</text>
+  <text x="50" y="275" text-anchor="end" font-size="14" fill="#334155">Outras 48 threads</text>
+
+  <!-- Thread A: lê version 0, UPDATE vence -->
+  <rect x="120" y="92" width="200" height="36" rx="6" fill="#dcfce7" stroke="#16a34a"/>
+  <text x="220" y="115" text-anchor="middle" font-size="13" fill="#14532d">lê estoque=1, version=0</text>
+  <rect x="340" y="92" width="200" height="36" rx="6" fill="#bbf7d0" stroke="#15803d" stroke-width="2"/>
+  <text x="440" y="115" text-anchor="middle" font-size="13" fill="#14532d">UPDATE ok: estoque=0, version=1</text>
+  <rect x="680" y="92" width="130" height="36" rx="18" fill="#16a34a"/>
+  <text x="745" y="115" text-anchor="middle" font-size="14" font-weight="600" fill="#ffffff">201 Created</text>
+
+  <!-- Thread B: lê version 0, UPDATE perde -->
+  <rect x="120" y="172" width="200" height="36" rx="6" fill="#dcfce7" stroke="#16a34a"/>
+  <text x="220" y="195" text-anchor="middle" font-size="13" fill="#14532d">lê estoque=1, version=0</text>
+  <rect x="340" y="172" width="200" height="36" rx="6" fill="#fee2e2" stroke="#dc2626"/>
+  <text x="440" y="195" text-anchor="middle" font-size="13" fill="#7f1d1d">UPDATE falha: version mudou</text>
+  <rect x="680" y="172" width="130" height="36" rx="18" fill="#dc2626"/>
+  <text x="745" y="195" text-anchor="middle" font-size="14" font-weight="600" fill="#ffffff">409 Conflict</text>
+
+  <!-- Demais threads -->
+  <rect x="120" y="252" width="200" height="36" rx="6" fill="#f1f5f9" stroke="#94a3b8"/>
+  <text x="220" y="275" text-anchor="middle" font-size="13" fill="#334155">lê estoque=0 ou version antiga</text>
+  <rect x="340" y="252" width="200" height="36" rx="6" fill="#fee2e2" stroke="#dc2626"/>
+  <text x="440" y="275" text-anchor="middle" font-size="13" fill="#7f1d1d">recusa por falta de estoque</text>
+  <rect x="680" y="252" width="130" height="36" rx="18" fill="#dc2626"/>
+  <text x="745" y="275" text-anchor="middle" font-size="14" font-weight="600" fill="#ffffff">409 Conflict</text>
+
+  <text x="440" y="340" text-anchor="middle" font-size="15" font-weight="600" fill="#0f172a">Resultado: exatamente 1 reserva, estoque final 0, zero overbooking</text>
+  <text x="440" y="368" text-anchor="middle" font-size="13" fill="#475569">Teste: ReservaConcorrenciaTest (50 threads, Testcontainers PostgreSQL)</text>
+</svg>
