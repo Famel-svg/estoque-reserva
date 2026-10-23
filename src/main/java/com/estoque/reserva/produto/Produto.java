@@ -1,5 +1,6 @@
 package com.estoque.reserva.produto;
 
+import com.estoque.reserva.dominio.EstoqueInsuficienteException;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -23,6 +24,26 @@ public class Produto {
     private long version;
 
     protected Produto() {
+    }
+
+    public Produto(String nome, int estoqueDisponivel) {
+        this.nome = nome;
+        this.estoqueDisponivel = estoqueDisponivel;
+    }
+
+    public void reservar(int quantidade) {
+        if (quantidade <= 0) {
+            throw new IllegalArgumentException("quantidade deve ser positiva");
+        }
+        if (quantidade > estoqueDisponivel) {
+            throw new EstoqueInsuficienteException(
+                    "estoque insuficiente para " + nome + ": disponível " + estoqueDisponivel);
+        }
+        estoqueDisponivel -= quantidade;
+    }
+
+    public void devolver(int quantidade) {
+        estoqueDisponivel += quantidade;
     }
 
     public Long getId() {

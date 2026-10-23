@@ -1,5 +1,6 @@
 package com.estoque.reserva.reserva;
 
+import com.estoque.reserva.dominio.OperacaoInvalidaException;
 import com.estoque.reserva.produto.Produto;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -49,6 +50,35 @@ public class Reserva {
         this.status = status;
         this.criadoEm = criadoEm;
         this.expiresAt = expiresAt;
+    }
+
+    public void confirmar(Instant agora) {
+        if (status != StatusReserva.PENDENTE) {
+            throw new OperacaoInvalidaException("só reserva PENDENTE pode ser confirmada");
+        }
+        if (!agora.isBefore(expiresAt)) {
+            throw new OperacaoInvalidaException("reserva expirada não pode ser confirmada");
+        }
+        status = StatusReserva.CONFIRMADA;
+    }
+
+    /** Cancela a reserva e devolve a quantidade ao estoque do produto. */
+    public void cancelar() {
+        if (status != StatusReserva.PENDENTE && status != StatusReserva.CONFIRMADA) {
+            throw new OperacaoInvalidaException("reserva " + status + " não pode ser cancelada");
+        }
+        status = StatusReserva.CANCELADA;
+        produto.devolver(quantidade);
+    }
+
+    /** Expira reserva pendente vencida e devolve o estoque. Retorna true se expirou. */
+    public boolean expirar(Instant agora) {
+        if (status != StatusReserva.PENDENTE || agora.isBefore(expiresAt)) {
+            return false;
+        }
+        status = StatusReserva.EXPIRADA;
+        produto.devolver(quantidade);
+        return true;
     }
 
     public Long getId() {
